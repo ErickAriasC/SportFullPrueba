@@ -13,7 +13,7 @@ const PaymentMethod = () => {
 
   const fetchTotalValue = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/reservas/${reservaId}/valorTotal`);
+      const response = await fetch(`https://sportfullprueba-production.up.railway.app/reservas/${reservaId}/valorTotal`);
       if (!response.ok) {
         throw new Error("Error al obtener el valor total de la reserva.");
       }
@@ -60,8 +60,8 @@ const PaymentMethod = () => {
       country: "CO",
       lang: "es",
       external: "false",
-      response: `https://ced4-152-202-213-216.ngrok-free.app/api/pagos/respuesta?reservation_id=${reservaId}`,
-      confirmation: `https://ced4-152-202-213-216.ngrok-free.app/api/pagos/confirmacion?reservation_id=${reservaId}`,
+      response: `https://sportfullprueba-production.up.railway.app/api/pagos/respuesta?reservation_id=${reservaId}`,
+      confirmation: `https://sportfullprueba-production.up.railway.app/api/pagos/confirmacion?reservation_id=${reservaId}`,
       method: "popup",
     };
 

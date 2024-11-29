@@ -46,7 +46,7 @@ const MapaConGPS = () => {
   // Obtener todas las canchas del backend al cargar la página
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/admin/find-all`)
+      .get(`https://sportfullprueba-production.up.railway.app/admin/find-all`)
       .then((response) => {
         const fields = response.data;
         setAllFields(fields); // Guardar todas las canchas

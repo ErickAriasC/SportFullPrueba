@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = "http://localhost:8080/auth";
+const API_URL = "https://sportfullprueba-production.up.railway.app/auth";
 
 class ClienteService {
 
@@ -23,7 +23,7 @@ class ClienteService {
     // Actualizar los datos del cliente
     updateClient(id, updatedUser) {
         const token = localStorage.getItem('token'); // Obtén el token de autenticación
-        return axios.patch(`http://localhost:8080/client/update/${id}`, updatedUser, {
+        return axios.patch(`https://sportfullprueba-production.up.railway.app/client/update/${id}`, updatedUser, {
             headers: {
                 'Authorization': `Bearer ${token}` // Incluye el token en el encabezado
             }
@@ -33,7 +33,7 @@ class ClienteService {
     // Actualizar los datos del empresa
     updateCompany(id, updatedUser) {
         const token = localStorage.getItem('token'); // Obtén el token de autenticación
-        return axios.patch(`http://localhost:8080/admin/update/${id}`, updatedUser, {
+        return axios.patch(`https://sportfullprueba-production.up.railway.app/admin/update/${id}`, updatedUser, {
             headers: {
                 'Authorization': `Bearer ${token}` // Incluye el token en el encabezado
             }
@@ -47,7 +47,7 @@ class ClienteService {
 
         // Realiza una solicitud POST para crear el gestor
         return axios.post(
-            `http://localhost:8080/admin/gestor/register?adminEmpresa_Id=${adminEmpresaId}`,
+            `https://sportfullprueba-production.up.railway.app/admin/gestor/register?adminEmpresa_Id=${adminEmpresaId}`,
             user,
             {
                 headers: {
@@ -61,7 +61,7 @@ class ClienteService {
     //Actualizar datos del Gestor
     updateGestor(id, updatedUser) {
         const token = localStorage.getItem('token'); // Obtén el token de autenticación
-        return axios.patch(`http://localhost:8080/admin/gestor/update/${id}`, updatedUser, {
+        return axios.patch(`https://sportfullprueba-production.up.railway.app/admin/gestor/update/${id}`, updatedUser, {
             headers: {
                 'Authorization': `Bearer ${token}` // Incluye el token en el encabezado
             }
@@ -70,7 +70,7 @@ class ClienteService {
 
     //Mostrar todas la canchas
     getAllFields() {
-        return axios.get("http://localhost:8080/fields/findAll");
+        return axios.get("https://sportfullprueba-production.up.railway.app/fields/findAll");
     }
 
     //verificar email
@@ -80,19 +80,19 @@ class ClienteService {
 
     // Método para validar la contraseña
     validatePassword(id, data) {
-        return axios.post(`http://localhost:8080/security?idUser=${id}`, data);
+        return axios.post(`https://sportfullprueba-production.up.railway.app/security?idUser=${id}`, data);
     }
 
     // Actualiza este método para enviar los servicios seleccionados en el cuerpo de la solicitud
     createField(cancha, empresaId) {
         // Asegúrate de pasar `selectedServices` en el cuerpo junto con los demás datos
-        return axios.post(`http://localhost:8080/fields/create?empresaId=${empresaId}`, cancha);
+        return axios.post(`https://sportfullprueba-production.up.railway.app/fields/create?empresaId=${empresaId}`, cancha);
     }
 
     // Eliminar una cancha
     deleteField(fieldId, empresaId) {
         const token = localStorage.getItem('token'); // Obtén el token de autenticación
-        return axios.delete(`http://localhost:8080/fields/delete`, {
+        return axios.delete(`https://sportfullprueba-production.up.railway.app/fields/delete`, {
             headers: {
                 'Authorization': `Bearer ${token}` // Incluye el token en el encabezado
             },
@@ -106,7 +106,7 @@ class ClienteService {
     // Método para actualizar una cancha
     updateField(fieldId, updatedField, empresaId) {
         const token = localStorage.getItem('token'); // Obtén el token de autenticación
-        return axios.put(`http://localhost:8080/fields/update`, updatedField, {
+        return axios.put(`https://sportfullprueba-production.up.railway.app/fields/update`, updatedField, {
             headers: {
                 'Authorization': `Bearer ${token}` // Incluye el token en el encabezado
             },
@@ -119,23 +119,23 @@ class ClienteService {
 
     // Método para consultar cancha por ID
     getFieldById(fieldId) {
-        return axios.get(`http://localhost:8080/fields/findById/${fieldId}`);
+        return axios.get(`https://sportfullprueba-production.up.railway.app/fields/findById/${fieldId}`);
     }
 
     // Método para consultar gestor por ID
     getManagerById(managerId) {
-        return axios.get(` http://localhost:8080/admin/gestor/find/${managerId}`);
+        return axios.get(`https://sportfullprueba-production.up.railway.app/admin/gestor/find/${managerId}`);
     }
 
     //eliminar gestor
     deletedManager(gestorId) {
-        return axios.delete(`http://localhost:8080/admin/gestor/${gestorId}`);
+        return axios.delete(`https://sportfullprueba-production.up.railway.app/admin/gestor/${gestorId}`);
 
     }
 
     //actualizar gestor
     updatedManager(id, updatedManager) {
-        return axios.patch(`http://localhost:8080/admin/gestor/update/${id}`, updatedManager);;
+        return axios.patch(`https://sportfullprueba-production.up.railway.app/admin/gestor/update/${id}`, updatedManager);;
 
     };
 
@@ -145,7 +145,7 @@ class ClienteService {
         const formData = new FormData();
         formData.append("imgPerfil", imgPerfil);
 
-        return axios.post(`http://localhost:8080/admin/actualizar-imagen/${empresaId}`, formData, {
+        return axios.post(`https://sportfullprueba-production.up.railway.app/admin/actualizar-imagen/${empresaId}`, formData, {
             headers: {
                 'Authorization': `Bearer ${token}`, // Incluye el token en el encabezado
                 'Content-Type': 'multipart/form-data' // Asegura que el contenido sea multipart/form-data
@@ -159,7 +159,7 @@ class ClienteService {
         const formData = new FormData();
         formData.append("imgPerfil", imgPerfil);
 
-        return axios.post(`http://localhost:8080/client/actualizar-imagen/${clientId}`, formData, {
+        return axios.post(`https://sportfullprueba-production.up.railway.app/client/actualizar-imagen/${clientId}`, formData, {
             headers: {
                 'Authorization': `Bearer ${token}`, // Incluye el token en el encabezado
                 'Content-Type': 'multipart/form-data' // Asegura que el contenido sea multipart/form-data
@@ -173,7 +173,7 @@ class ClienteService {
         const formData = new FormData();
         formData.append("imgPerfil", imgPerfil);
 
-        return axios.post(`http://localhost:8080/gestor/actualizar-imagen/${managerId}`, formData, {
+        return axios.post(`https://sportfullprueba-production.up.railway.app/gestor/actualizar-imagen/${managerId}`, formData, {
             headers: {
                 'Authorization': `Bearer ${token}`, // Incluye el token en el encabezado
                 'Content-Type': 'multipart/form-data' // Asegura que el contenido sea multipart/form-data
@@ -186,7 +186,7 @@ class ClienteService {
     createReservation(reservation, fieldId, adminId, clientId, userEmail) {
         const token = localStorage.getItem('token'); // Obtener el token del localStorage
         return axios.post(
-            `http://localhost:8080/reservas/create`, // URL del endpoint
+            `https://sportfullprueba-production.up.railway.app/reservas/create`, // URL del endpoint
             reservation, // Datos de la reserva
             {
                 params: {
@@ -206,7 +206,7 @@ class ClienteService {
     //filtrar reservas por usuario
     getReservationsByUser(userId) {
         const token = localStorage.getItem('token'); // Obtén el token de autenticación
-        return axios.get(`http://localhost:8080/reservas/user?userId=${userId}`, {
+        return axios.get(`https://sportfullprueba-production.up.railway.app/reservas/user?userId=${userId}`, {
             headers: {
                 'Authorization': `Bearer ${token}` // Incluye el token en el encabezado
             }
@@ -215,7 +215,7 @@ class ClienteService {
 
     // filtrar horarios reservados por cancha
     getHorariosReservados(idCancha, fecha) {
-        return axios.get(`http://localhost:8080/reservas/horarios/${idCancha}`, {
+        return axios.get(`https://sportfullprueba-production.up.railway.app/reservas/horarios/${idCancha}`, {
             params: { fecha }
         });
     }
@@ -223,7 +223,7 @@ class ClienteService {
     // Obtener historial de reservas por usuario
     getReservationsByUser(userId) {
         const token = localStorage.getItem('token'); // Obtén el token de autenticación
-        return axios.get(`http://localhost:8080/reservas/user`, {
+        return axios.get(`https://sportfullprueba-production.up.railway.app/reservas/user`, {
             params: { userId }, // Parámetro para enviar el ID del usuario
             headers: {
                 'Authorization': `Bearer ${token}` // Incluye el token en el encabezado
@@ -234,7 +234,7 @@ class ClienteService {
     // Actualizar una reserva
     updateReservation(reservationId, updates) {
         const token = localStorage.getItem('token'); // Obtén el token de autenticación
-        return axios.patch(`http://localhost:8080/reservas/${reservationId}`, updates, {
+        return axios.patch(`https://sportfullprueba-production.up.railway.app/reservas/${reservationId}`, updates, {
             headers: {
                 'Authorization': `Bearer ${token}` // Incluye el token en el encabezado
             }
