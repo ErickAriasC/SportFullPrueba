@@ -21,7 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-@CrossOrigin
+@CrossOrigin(origins = "https://spontaneous-marshmallow-6b9479.netlify.app")
 @RestController
 @RequestMapping("/admin")
 public class AdminControllers {
