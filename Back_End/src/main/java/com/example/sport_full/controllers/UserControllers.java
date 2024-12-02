@@ -26,7 +26,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
-@CrossOrigin(origins = "https://spontaneous-marshmallow-6b9479.netlify.app")
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/auth")
 public class UserControllers {
@@ -91,6 +91,47 @@ public class UserControllers {
                 admin.setImgPerfil(getDefaultImage("EMPRESA"));
                 companyRepository.save(admin);
             }
+
+            // Enviar el correo de verificación
+            emailService.sendVerificationEmail(userModels.getEmail(), verificationToken);
+
+            // Retornar el modelo de usuario registrado, pero sin contraseña
+            userModels.setContraseña(null);
+            return ResponseEntity.ok(userModels);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
+        }
+    }
+
+    //    Registrarse como invitado
+    @PostMapping("/register-guest")
+    public ResponseEntity<?> GuestRegistration(@RequestBody UserModels userModels) {
+        try {
+            // Validaciones del usuario
+            userValidations.validate(userModels);
+
+            // Asignar tipo de usuario por defecto como "CLIENTE"
+            userModels.setTipoUsuario("CLIENTE");
+
+            // Encriptar la contraseña
+            String hashedPassword = BCrypt.hashpw(userModels.getContraseña(), BCrypt.gensalt());
+            userModels.setContraseña(hashedPassword);
+
+            // Generar el token de verificación de correo electrónico
+            String verificationToken = UUID.randomUUID().toString();
+            userModels.setVerificationToken(verificationToken);
+            userModels.setEmailVerified(false);
+
+            // Guardar el usuario en la tabla 'usuarios'
+            userRepository.save(userModels);
+
+            // Crear el modelo de cliente y guardar en la tabla 'clientes'
+            ClientModels client = new ClientModels();
+            client.setUserModels(userModels);
+
+            // Establecer imagen predeterminada
+            client.setImgPerfil(getDefaultImage("CLIENTE"));
+            clientRepository.save(client);
 
             // Enviar el correo de verificación
             emailService.sendVerificationEmail(userModels.getEmail(), verificationToken);

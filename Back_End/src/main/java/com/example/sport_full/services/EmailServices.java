@@ -22,7 +22,7 @@ public class EmailServices {
         message.setTo(email);
         message.setSubject("Verificación de Correo");
         message.setText("Para verificar tu correo, por favor haz clic en el siguiente enlace: "
-                + "https://spontaneous-marshmallow-6b9479.netlify.app/verify-email?token=" + verificationToken);
+                + "http://localhost:5173/auth/verify?token=" + verificationToken);
         mailSender.send(message);
     }
 }
