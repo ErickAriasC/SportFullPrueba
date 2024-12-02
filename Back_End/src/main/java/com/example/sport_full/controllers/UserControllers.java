@@ -26,7 +26,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "https://spontaneous-marshmallow-6b9479.netlify.app/")
 @RestController
 @RequestMapping("/auth")
 public class UserControllers {
